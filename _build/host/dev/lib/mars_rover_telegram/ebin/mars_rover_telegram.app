@@ -1,0 +1,9 @@
+{application,mars_rover_telegram,
+             [{applications,[kernel,stdlib,elixir,logger,runtime_tools,
+                             toolshed,ring_logger,shoehorn]},
+              {description,"mars_rover_telegram"},
+              {modules,['Elixir.MarsRoverTelegram',
+                        'Elixir.MarsRoverTelegram.Application']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.MarsRoverTelegram.Application',[]}}]}.
