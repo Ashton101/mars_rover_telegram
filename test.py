@@ -9,7 +9,6 @@ GPIO.setmode(GPIO.BOARD)
 
 DirectionOnePin = 16
 DirectionTwoPin = 18
-
 DirectionThreePin = 13
 DirectionFourPin = 15
 
@@ -20,25 +19,33 @@ GPIO.setup(DirectionTwoPin, GPIO.OUT)
 GPIO.setup(DirectionThreePin, GPIO.OUT)
 GPIO.setup(DirectionFourPin, GPIO.OUT)
 
-print("Motor A Direction forward")
-GPIO.output(DirectionOnePin, GPIO.HIGH)
-time.sleep(2)
-GPIO.output(DirectionOnePin, GPIO.LOW)
+right_motor_forward()
 
-print("Motor A Direction backward")
-GPIO.output(DirectionTwoPin, GPIO.HIGH)
-time.sleep(2)
-GPIO.output(DirectionTwoPin, GPIO.LOW)
+def right_motor_forward():
+  print("Motor R Direction forward")
+  GPIO.output(DirectionOnePin, GPIO.HIGH)
+  time.sleep(1.5)
+  GPIO.output(DirectionOnePin, GPIO.LOW)
 
-print("Motor B Direction forward")
-GPIO.output(DirectionThreePin, GPIO.HIGH)
-time.sleep(2)
-GPIO.output(DirectionThreePin, GPIO.LOW)
+def right_motor_backward():
+  print("Motor R Direction backward")
+  GPIO.output(DirectionTwoPin, GPIO.HIGH)
+  time.sleep(1.5)
+  GPIO.output(DirectionTwoPin, GPIO.LOW)
 
-print("Motor B Direction backward")
-GPIO.output(DirectionFourPin, GPIO.HIGH)
-time.sleep(2)
-GPIO.output(DirectionFourPin, GPIO.LOW)
+def left_motor_forward():
+  print("Motor L Direction forward")
+  GPIO.output(DirectionThreePin, GPIO.HIGH)
+  time.sleep(1.5)
+  GPIO.output(DirectionThreePin, GPIO.LOW)
+
+def left_motor_backward():
+  print("Motor L Direction backward")
+  GPIO.output(DirectionFourPin, GPIO.HIGH)
+  time.sleep(1.5)
+  GPIO.output(DirectionFourPin, GPIO.LOW)
+
+
 
 
 # This command clears the configuration from the GPIO interface
