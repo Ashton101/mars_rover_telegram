@@ -42,6 +42,9 @@ defmodule ElixirRover do
     IO.puts("Motor L Direction backward")
     pid_l = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_left_backward) end)
 
+    GPIO.write(pid_r, 1)
+    GPIO.write(pid_l, 1)
+
     :timer.sleep(500)
 
     GPIO.write(pid_r, 0)
@@ -55,6 +58,9 @@ defmodule ElixirRover do
     IO.puts("Motor L Direction forward")
     pid_l = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_left_forward) end)
 
+    GPIO.write(pid_r, 1)
+    GPIO.write(pid_l, 1)
+
     :timer.sleep(500)
 
     GPIO.write(pid_r, 0)
@@ -67,6 +73,9 @@ defmodule ElixirRover do
 
     IO.puts("Motor L Direction forward")
     pid_l = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_left_forward) end)
+
+    GPIO.write(pid_r, 1)
+    GPIO.write(pid_l, 1)
 
     :timer.sleep(1000)
 
