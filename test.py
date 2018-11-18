@@ -19,8 +19,6 @@ GPIO.setup(DirectionTwoPin, GPIO.OUT)
 GPIO.setup(DirectionThreePin, GPIO.OUT)
 GPIO.setup(DirectionFourPin, GPIO.OUT)
 
-right_motor_forward()
-
 def right_motor_forward():
   print("Motor R Direction forward")
   GPIO.output(DirectionOnePin, GPIO.HIGH)
@@ -45,8 +43,10 @@ def left_motor_backward():
   time.sleep(1.5)
   GPIO.output(DirectionFourPin, GPIO.LOW)
 
-
-
+right_motor_forward()
+right_motor_backward()
+left_motor_forward()
+left_motor_backward()
 
 # This command clears the configuration from the GPIO interface
 GPIO.cleanup()
