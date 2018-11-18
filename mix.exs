@@ -43,7 +43,7 @@ defmodule MarsRoverTelegram.MixProject do
       {:ring_logger, "~> 0.6"},
       {:toolshed, "~> 0.2"},
       {:elixir_ale, "~> 1.2"},
-      {:gpio_rpi, "~> 0.5.8"},
+      {:gpio_rpi, "~> 0.2"},
     ] ++ deps(@target)
   end
 
