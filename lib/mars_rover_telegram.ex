@@ -18,15 +18,27 @@ defmodule MarsRoverTelegram do
   end
 
   def test do
-    {:ok, pid} = GPIO.start_link(18, :output)
-    IO.puts "Writing to pin 18..."
-    GPIO.write(pid, 1)
+    {:ok, pid16} = GPIO.start_link(16, :output)
+    IO.puts "Writing to pin one 16..."
+    GPIO.write(pid16, 1)
     IO.puts "Done."
 
-    :timer.sleep(1000)
+    :timer.sleep(2000)
+
+    IO.puts "Writing to pin 16..."
+    GPIO.write(pid16, 0)
+    IO.puts "Done."
+
+    {:ok, pid18} = GPIO.start_link(18, :output)
+    IO.puts "Writing to pin one 18..."
+    GPIO.write(pid18, 1)
+    IO.puts "Done."
+
+    :timer.sleep(2000)
 
     IO.puts "Writing to pin 18..."
-    GPIO.write(pid, 0)
+    GPIO.write(pid18, 0)
     IO.puts "Done."
+
   end
 end
