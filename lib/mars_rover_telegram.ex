@@ -18,7 +18,7 @@ defmodule MarsRoverTelegram do
   end
 
   def test do
-    {:ok, pid16} = GPIO.start_link(16, :output)
+    {:ok, pid16} = ElixirALE.GPIO.start_link(16, :output)
     IO.puts "Writing to pin one 16..."
     GPIO.write(pid16, 1)
     IO.puts "Done."
@@ -40,5 +40,29 @@ defmodule MarsRoverTelegram do
     GPIO.write(pid18, 0)
     IO.puts "Done."
 
+  end
+
+  def test2 do
+    {:ok, gpio16} = Circuits.GPIO.open(16, :output)
+    IO.puts "Writing to pin one 16..."
+    Circuits.GPIO.write(gpio16, 1)
+    IO.puts "Done."
+
+    :timer.sleep(2000)
+
+    IO.puts "Writing to pin 16..."
+    Circuits.GPIO.write(gpio16, 0)
+    IO.puts "Done."
+
+    {:ok, gpio18} = Circuits.GPIO.open(18, :output)
+    IO.puts "Writing to pin one 16..."
+    Circuits.GPIO.write(gpio18, 1)
+    IO.puts "Done."
+
+    :timer.sleep(2000)
+
+    IO.puts "Writing to pin 18..."
+    Circuits.GPIO.write(gpio18, 0)
+    IO.puts "Done."
   end
 end
