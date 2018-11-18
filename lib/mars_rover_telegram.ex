@@ -65,4 +65,17 @@ defmodule MarsRoverTelegram do
     Circuits.GPIO.write(gpio18, 0)
     IO.puts "Done."
   end
+
+  def test3 do
+    {:ok, rpi18} = GpioRpi.start_link(18, :output)
+    IO.puts "Writing to pin one 18..."
+    GpioRpi.write(rpi18, 1)
+    IO.puts "Done."
+
+    :timer.sleep(2000)
+
+    IO.puts "Writing to pin one 18..."
+    GpioRpi.write(rpi18, 0)
+    IO.puts "Done."
+  end
 end
