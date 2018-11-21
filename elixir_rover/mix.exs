@@ -43,6 +43,7 @@ defmodule ElixirRover.MixProject do
       {:ring_logger, "~> 0.6"},
       {:elixir_ale, "~> 1.2"},
       {:toolshed, "~> 0.2"},
+      {:telex, git: "https://github.com/rockneurotiko/telex.git", tag: "0.4.0"}
     ] ++ deps(@target)
   end
 

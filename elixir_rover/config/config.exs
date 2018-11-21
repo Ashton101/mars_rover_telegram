@@ -29,3 +29,6 @@ config :logger, backends: [RingLogger]
 # Uncomment to use target specific configurations
 
 # import_config "#{Mix.Project.config[:target]}.exs"
+
+config :elixir_rover,
+  token: "763004957:AAGrARjLydXgmp7z45mlKRfJ8UfCNJSQV2U"

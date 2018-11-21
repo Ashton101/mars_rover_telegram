@@ -4,28 +4,26 @@ defmodule ElixirRover.Application do
   @moduledoc false
 
   @target Mix.Project.config()[:target]
+  require Logger
 
   use Application
+  import Supervisor.Spec
 
   def start(_type, _args) do
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
+    token = Telex.Config.get(:elixir_rover, :token)
+
+    children = [supervisor(Telex, []), supervisor(ElixirRover.Bot, [:polling, token])]
+
     opts = [strategy: :one_for_one, name: ElixirRover.Supervisor]
-    Supervisor.start_link(children(@target), opts)
-  end
 
-  # List all child processes to be supervised
-  def children("host") do
-    [
-      # Starts a worker by calling: ElixirRover.Worker.start_link(arg)
-      # {ElixirRover.Worker, arg},
-    ]
-  end
+    case Supervisor.start_link(children, opts) do
+      {:ok, _} = ok ->
+        Logger.info("Starting Elixir Rover")
+        ok
 
-  def children(_target) do
-    [
-      # Starts a worker by calling: ElixirRover.Worker.start_link(arg)
-      # {ElixirRover.Worker, arg},
-    ]
+      error ->
+        Logger.error("Error starting Elixir Rover")
+        error
+    end
   end
 end
