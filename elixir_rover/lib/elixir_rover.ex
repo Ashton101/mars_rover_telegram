@@ -2,7 +2,7 @@ defmodule ElixirRover do
   # Physical pins 13,15,16,18
   # GPIO27,GPIO22,GPIO23,GPIO24
   alias ElixirALE.GPIO
-  # alias Agent.{ Driver }
+  alias ElixirRover.{ Driver }
 
   @pin_left_motor_forward 13
   @pin_left_motor_backward 15
@@ -33,86 +33,27 @@ defmodule ElixirRover do
       }
     end, name: :motor_pids)
 
+    Agent.start_link(fn -> :queue.new() end, name: :driver_queue)
+  end
+
+  def command(movement) do
+    case movement do
+      "L" -> turn_left
+      "M" -> move
+      "R" -> turn_right
+    end
   end
 
   def turn_left do
-    IO.puts("Motor R Direction forward")
-    pid_r = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_right_forward) end)
-
-    IO.puts("Motor L Direction backward")
-    pid_l = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_left_backward) end)
-
-    GPIO.write(pid_r, 1)
-    GPIO.write(pid_l, 1)
-
-    :timer.sleep(500)
-
-    GPIO.write(pid_r, 0)
-    GPIO.write(pid_l, 0)
+    Driver.turn_left
   end
 
   def turn_right do
-    IO.puts("Motor R Direction backward")
-    pid_r = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_right_backward) end)
-
-    IO.puts("Motor L Direction forward")
-    pid_l = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_left_forward) end)
-
-    GPIO.write(pid_r, 1)
-    GPIO.write(pid_l, 1)
-
-    :timer.sleep(500)
-
-    GPIO.write(pid_r, 0)
-    GPIO.write(pid_l, 0)
+    Driver.turn_right
   end
 
   def move do
-    IO.puts("Motor R Direction forward")
-    pid_r = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_right_forward) end)
-
-    IO.puts("Motor L Direction forward")
-    pid_l = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_left_forward) end)
-
-    GPIO.write(pid_r, 1)
-    GPIO.write(pid_l, 1)
-
-    :timer.sleep(1000)
-
-    GPIO.write(pid_r, 0)
-    GPIO.write(pid_l, 0)
-  end
-
-  def right_motor_forward do
-    IO.puts("Motor R Direction forward")
-    pid = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_right_forward) end)
-    GPIO.write(pid, 1)
-    :timer.sleep(1500)
-    GPIO.write(pid, 0)
-  end
-
-  def right_motor_backward do
-    IO.puts("Motor R Direction backward")
-    pid = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_right_backward) end)
-    GPIO.write(pid, 1)
-    :timer.sleep(1500)
-    GPIO.write(pid, 0)
-  end
-
-  def left_motor_forward do
-    IO.puts("Motor L Direction forward")
-    pid = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_left_forward) end)
-    GPIO.write(pid, 1)
-    :timer.sleep(1500)
-    GPIO.write(pid, 0)
-  end
-
-  def left_motor_backward do
-    IO.puts("Motor L Direction backward")
-    pid = Agent.get(:motor_pids, fn map -> Map.get(map, :pid_left_backward) end)
-    GPIO.write(pid, 1)
-    :timer.sleep(1500)
-    GPIO.write(pid, 0)
+    Driver.move
   end
 
 end
