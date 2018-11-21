@@ -9,7 +9,7 @@ defmodule ElixirRover.Bot do
   end
 
   def handle({:command, "move", msg}, _name, _extra) do
-    case msg do
+    case msg.text do
       "L" ->
         ElixirRover.turn_left
         answer("moved")
