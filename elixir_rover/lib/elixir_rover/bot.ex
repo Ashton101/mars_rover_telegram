@@ -10,11 +10,20 @@ defmodule ElixirRover.Bot do
 
   def handle({:command, "move", msg}, _name, _extra) do
     case msg do
-      "L" -> ElixirRover.turn_left
-      "M" -> ElixirRover.move
-      "R" -> ElixirRover.turn_right
-      _ -> nil
+      "L" ->
+        ElixirRover.turn_left
+        answer("moved")
+
+      "M" ->
+        ElixirRover.move
+        answer("moved")
+
+      "R" ->
+        ElixirRover.turn_right
+        answer("moved")
+      _ ->
+        answer("Invalid command #{msg}")
     end
-    answer("moved")
+
   end
 end
