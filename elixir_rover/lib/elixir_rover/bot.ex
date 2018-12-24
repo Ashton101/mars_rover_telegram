@@ -1,5 +1,5 @@
 defmodule ElixirRover.Bot do
-  alias ElixirRover.{ Navigator }
+  alias ElixirRover.{Navigator}
 
   @bot_name :elixir_rover
 
@@ -7,7 +7,7 @@ defmodule ElixirRover.Bot do
   use Telex.Dsl
 
   def handle({:command, "start", msg}, _name, _extra) do
-    ElixirRover.start
+    ElixirRover.start()
     answer("Rover has started up!")
   end
 
@@ -15,6 +15,4 @@ defmodule ElixirRover.Bot do
     {:ok, reply} = Navigator.move({:direction, msg.text})
     answer(reply)
   end
-
-
 end

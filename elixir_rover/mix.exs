@@ -44,7 +44,7 @@ defmodule ElixirRover.MixProject do
       {:elixir_ale, "~> 1.2"},
       {:toolshed, "~> 0.2"},
       {:telex, git: "https://github.com/rockneurotiko/telex.git", tag: "0.4.0"},
-      {:gen_stage, "~> 0.14"},
+      {:gen_stage, "~> 0.14"}
     ] ++ deps(@target)
   end
 

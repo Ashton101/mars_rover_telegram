@@ -19,21 +19,23 @@ defmodule ElixirRover do
   end
 
   def start do
-    { :ok, pid_right_forward } = GPIO.start_link(pin_to_gpio(@pin_right_motor_forward), :output)
-    { :ok, pid_right_backward } = GPIO.start_link(pin_to_gpio(@pin_right_motor_backward), :output)
-    { :ok, pid_left_forward } = GPIO.start_link(pin_to_gpio(@pin_left_motor_forward), :output)
-    { :ok, pid_left_backward } = GPIO.start_link(pin_to_gpio(@pin_left_motor_backward), :output)
+    {:ok, pid_right_forward} = GPIO.start_link(pin_to_gpio(@pin_right_motor_forward), :output)
+    {:ok, pid_right_backward} = GPIO.start_link(pin_to_gpio(@pin_right_motor_backward), :output)
+    {:ok, pid_left_forward} = GPIO.start_link(pin_to_gpio(@pin_left_motor_forward), :output)
+    {:ok, pid_left_backward} = GPIO.start_link(pin_to_gpio(@pin_left_motor_backward), :output)
 
-    Agent.start_link(fn ->
-      %{
-        pid_right_forward: pid_right_forward,
-        pid_right_backward: pid_right_backward,
-        pid_left_forward: pid_left_forward,
-        pid_left_backward: pid_left_backward,
-      }
-    end, name: :motor_pids)
+    Agent.start_link(
+      fn ->
+        %{
+          pid_right_forward: pid_right_forward,
+          pid_right_backward: pid_right_backward,
+          pid_left_forward: pid_left_forward,
+          pid_left_backward: pid_left_backward
+        }
+      end,
+      name: :motor_pids
+    )
 
     Agent.start_link(fn -> :queue.new() end, name: :commands_queue)
   end
-
 end
